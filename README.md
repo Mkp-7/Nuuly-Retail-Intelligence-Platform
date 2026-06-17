@@ -19,7 +19,7 @@ Built entirely with free tools: **Groq** (LLM) · **Yelp Open Dataset** · **Str
 
 ## Quickstart
 
-### Step 1 — Get the Yelp Dataset (free, one-time)
+### Step 1 - Get the Yelp Dataset (free, one-time)
 1. Go to: https://www.yelp.com/dataset
 2. Click "Download Dataset" and create a free account
 3. Download and extract the TAR file (~4 GB compressed)
@@ -27,12 +27,12 @@ Built entirely with free tools: **Groq** (LLM) · **Yelp Open Dataset** · **Str
    - `yelp_academic_dataset_business.json`
    - `yelp_academic_dataset_review.json`
 
-### Step 2 — Get a Groq API key (free, no credit card)
+### Step 2 - Get a Groq API key (free, no credit card)
 1. Go to: https://console.groq.com
 2. Sign up → API Keys → Create Key
 3. Copy the key
 
-### Step 3 — Configure environment
+### Step 3 - Configure environment
 ```bash
 git clone https://github.com/YOUR_USERNAME/retail-intelligence-platform
 cd retail-intelligence-platform
@@ -41,13 +41,13 @@ cp .env.example .env
 # Edit .env and paste your Groq API key
 ```
 
-### Step 4 — Extract store reviews (run once, ~10 minutes)
+### Step 4 - Extract store reviews (run once, ~10 minutes)
 ```bash
 python module1_voice_of_customer/01_extract_reviews.py
 ```
 Outputs `data/businesses.csv` and `data/reviews.csv`.
 
-### Step 5 — Launch
+### Step 5 - Launch
 ```bash
 streamlit run main_app.py
 ```
@@ -58,7 +58,7 @@ streamlit run main_app.py
 1. Push repo to GitHub
 2. Go to https://streamlit.io/cloud → connect repo
 3. Add `GROQ_API_KEY` in Streamlit Secrets
-4. Deploy — get a free public URL
+4. Deploy - get a free public URL
 
 ---
 
