@@ -29,9 +29,9 @@ def build_context():
     dist_text = ", ".join([f"{int(k)} star: {int(v)} ({v/total*100:.1f}%)" for k,v in dist.items()])
 
     if "version" in df.columns:
-        va = df.groupby("version")["stars"].agg(avg="mean",count="count").sort_values("avg")
-        worst_v = "\n".join([f"  v{r['version']}: {r['avg']:.2f}⭐ ({r['count']} reviews)" for _,r in va.head(3).iterrows()])
-        best_v  = "\n".join([f"  v{r['version']}: {r['avg']:.2f}⭐ ({r['count']} reviews)" for _,r in va.tail(3).iterrows()])
+        va = df.groupby("version")["stars"].agg(avg="mean",count="count").reset_index().sort_values("avg")
+        worst_v = "\n".join([f"  v{row.version}: {row.avg:.2f}⭐ ({row.count} reviews)" for row in va.head(3).itertuples(index=False)])
+        best_v  = "\n".join([f"  v{row.version}: {row.avg:.2f}⭐ ({row.count} reviews)" for row in va.tail(3).itertuples(index=False)])
     else:
         worst_v = best_v = "N/A"
 
