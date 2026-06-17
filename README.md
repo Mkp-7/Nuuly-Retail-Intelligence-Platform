@@ -1,96 +1,41 @@
 # Retail Intelligence Platform
 
-An AI-native customer intelligence platform that turns public customer review data into actionable insights for Store Operations leaders.
+> AI-powered customer intelligence for Store Operations - turning raw customer feedback into executive-ready insights automatically.
 
-Built entirely with free tools: **Groq** (LLM) · **Yelp Open Dataset** · **Streamlit** · **Plotly**
+## Overview
 
----
+A 4-module analytics platform that ingests real customer review data and delivers continuous, automated insights for Store Operations leaders. What traditionally takes an analyst 3 days to produce manually - theme analysis, anomaly detection, executive summaries - this platform produces in under 30 seconds.
 
-## Modules
+## What It Does
 
-| Module | What it does |
-|---|---|
-| **1. Voice of Customer AI** | Ingests reviews → AI clusters themes, detects store anomalies, writes executive summaries |
-| **2. Store Pulse Map** | Interactive map benchmarking every store against its regional peer group |
-| **3. Test & Learn Autopilot** | Upload pilot vs control CSVs → statistical significance + scale/kill verdict |
-| **4. Analyst Copilot** | Plain-English Q&A chatbot with full dataset context |
+**Voice of Customer AI**
+Reads thousands of customer reviews and automatically identifies recurring themes, flags locations with sudden rating drops, and generates polished executive summaries ready for leadership - no manual effort required.
 
----
+**Version & Trend Intelligence**
+Tracks how customer sentiment evolves over time, pinpointing exactly which product or app release caused a rating shift. Gives operations leaders a clear before/after view of every change.
 
-## Quickstart
+**Test & Learn Autopilot**
+Uploads pilot vs control data and instantly computes statistical significance, effect size, and a clear verdict - scale it, kill it, or keep watching. Eliminates the need to wait for monthly manual reads.
 
-### Step 1 - Get the Yelp Dataset (free, one-time)
-1. Go to: https://www.yelp.com/dataset
-2. Click "Download Dataset" and create a free account
-3. Download and extract the TAR file (~4 GB compressed)
-4. Place these two files in the `data/` folder:
-   - `yelp_academic_dataset_business.json`
-   - `yelp_academic_dataset_review.json`
+**Analyst Copilot**
+A plain-English chat interface where any leader can ask questions about customer sentiment and get answers backed by real data - without routing requests through the analytics team.
 
-### Step 2 - Get a Groq API key (free, no credit card)
-1. Go to: https://console.groq.com
-2. Sign up → API Keys → Create Key
-3. Copy the key
+## Live Demo
 
-### Step 3 - Configure environment
-```bash
-git clone https://github.com/YOUR_USERNAME/retail-intelligence-platform
-cd retail-intelligence-platform
-pip install -r requirements.txt
-cp .env.example .env
-# Edit .env and paste your Groq API key
-```
+[View on Streamlit Cloud](https://nuuly-retail-intelligence-platform.streamlit.app)
 
-### Step 4 - Extract store reviews (run once, ~10 minutes)
-```bash
-python module1_voice_of_customer/01_extract_reviews.py
-```
-Outputs `data/businesses.csv` and `data/reviews.csv`.
+## Key Results
 
-### Step 5 - Launch
-```bash
-streamlit run main_app.py
-```
+- **433** real customer reviews analyzed automatically
+- **94** app versions tracked for sentiment regression
+- **3.89 / 5.0** average rating with **21.5%** negative sentiment surfaced
+- **Zero** manual data pulls - fully automated pipeline
+- **6 years** of historical trend data (Jul 2020 – May 2026)
+
+## Built With
+
+Python · Streamlit · Plotly · Groq LLM · SciPy · Pandas · GitHub Actions
 
 ---
 
-## Deploy Free on Streamlit Cloud
-1. Push repo to GitHub
-2. Go to https://streamlit.io/cloud → connect repo
-3. Add `GROQ_API_KEY` in Streamlit Secrets
-4. Deploy - get a free public URL
-
----
-
-## Configuration
-
-Edit `config.py` to point the platform at any retail chain in the Yelp dataset:
-
-```python
-TARGET_BUSINESS_NAMES = ["your store name"]
-```
-
-The Yelp dataset contains 150,000+ businesses across many retail categories.
-
----
-
-## Project Structure
-```
-retail-intelligence-platform/
-├── main_app.py
-├── config.py
-├── requirements.txt
-├── .env.example
-├── data/
-│   └── README_get_data.md
-├── module1_voice_of_customer/
-│   ├── 01_extract_reviews.py
-│   ├── voc_analyzer.py
-│   └── app.py
-├── module2_store_pulse_map/
-│   └── app.py
-├── module3_test_and_learn/
-│   └── app.py
-└── module4_analyst_copilot/
-    └── app.py
-```
+*Configured for Nuuly. The platform is designed to work across any retail brand.*
