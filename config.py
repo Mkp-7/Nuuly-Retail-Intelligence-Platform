@@ -1,10 +1,10 @@
 """
-Configuration — edit this file to target any app.
+Configuration - edit this file to target any app.
 
 To switch to a different company:
 1. Update APP_STORE_ID with the Apple App Store app ID
 2. Update APP_NAME, PLATFORM_TITLE, PLATFORM_SUBTITLE, PLATFORM_ICON
-3. Commit and push — GitHub Actions runs the scraper automatically
+3. Commit and push - GitHub Actions runs the scraper automatically
 4. Streamlit Cloud redeploys automatically
 
 How to find APP_STORE_ID:
