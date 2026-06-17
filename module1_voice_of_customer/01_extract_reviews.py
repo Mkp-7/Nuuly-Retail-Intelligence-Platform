@@ -1,5 +1,5 @@
 """
-Step 1 — Scrape App Store reviews for the configured app.
+Step 1 - Scrape App Store reviews for the configured app.
 
 Runs automatically via GitHub Actions on every push.
 Can also be run locally:
@@ -56,7 +56,7 @@ def fetch_page(page: int) -> list:
     except urllib.error.HTTPError as e:
         if e.code == 404:
             return []   # No more pages
-        print(f"  HTTP {e.code} on page {page} — stopping")
+        print(f"  HTTP {e.code} on page {page} - stopping")
         return []
     except Exception as e:
         print(f"  Error on page {page}: {e}")
@@ -100,7 +100,7 @@ def main():
         all_reviews.extend(reviews)
         print(f"got {len(reviews)} reviews (total: {len(all_reviews)})")
 
-        # Be polite — avoid rate limiting
+        # Be polite - avoid rate limiting
         if page < MAX_REVIEW_PAGES:
             time.sleep(0.5)
 
