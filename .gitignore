@@ -9,7 +9,7 @@ venv/
 env/
 .venv/
 
-# Yelp data — never commit (license restriction)
+# Yelp data - never commit (license restriction)
 data/yelp_academic_dataset_business.json
 data/yelp_academic_dataset_review.json
 data/businesses.csv
