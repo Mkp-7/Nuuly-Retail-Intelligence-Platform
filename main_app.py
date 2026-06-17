@@ -178,30 +178,28 @@ def nav_to(page_key: str):
 # ── Load home KPI data ────────────────────────────────────────────────────────
 def load_home_kpis():
     import pandas as pd
-    kpis = {}
     rev_path = os.path.join(BASE_DIR, "data", "reviews.csv")
-    biz_path = os.path.join(BASE_DIR, "data", "businesses.csv")
 
-    if os.path.exists(rev_path):
-        rev = pd.read_csv(rev_path, parse_dates=["date"])
-        rev["stars"] = pd.to_numeric(rev["stars"], errors="coerce")
-        kpis["total_reviews"]   = len(rev)
-        kpis["avg_rating"]      = round(rev["stars"].mean(), 2)
-        kpis["pct_negative"]    = round((rev["stars"] <= 2).mean() * 100, 1)
-        kpis["pct_positive"]    = round((rev["stars"] >= 4).mean() * 100, 1)
-        kpis["unique_locations"]= rev["business_id"].nunique()
-        if "date" in rev.columns and not rev["date"].isna().all():
-            kpis["date_min"] = rev["date"].min().strftime("%b %Y")
-            kpis["date_max"] = rev["date"].max().strftime("%b %Y")
-        else:
-            kpis["date_min"] = kpis["date_max"] = "N/A"
+    if not os.path.exists(rev_path):
+        return None
+
+    rev = pd.read_csv(rev_path, parse_dates=["date"])
+    rev["stars"] = pd.to_numeric(rev["stars"], errors="coerce")
+    rev = rev.dropna(subset=["stars"])
+
+    kpis = {}
+    kpis["total_reviews"] = len(rev)
+    kpis["avg_rating"]    = round(rev["stars"].mean(), 2)
+    kpis["pct_negative"]  = round((rev["stars"] <= 2).mean() * 100, 1)
+    kpis["pct_positive"]  = round((rev["stars"] >= 4).mean() * 100, 1)
+    kpis["versions"]      = rev["version"].nunique() if "version" in rev.columns else "N/A"
+
+    if "date" in rev.columns and not rev["date"].isna().all():
+        kpis["date_min"] = rev["date"].min().strftime("%b %Y")
+        kpis["date_max"] = rev["date"].max().strftime("%b %Y")
     else:
-        kpis = None
+        kpis["date_min"] = kpis["date_max"] = "N/A"
 
-    if os.path.exists(biz_path):
-        biz = pd.read_csv(biz_path)
-        kpis = kpis or {}
-        kpis["states"] = biz["state"].nunique() if "state" in biz.columns else "N/A"
     return kpis
 
 
@@ -212,15 +210,14 @@ if cur_page == "home":
 
     # Hero
     if kpis:
-        hero_reviews  = f"{kpis['total_reviews']:,}"
-        hero_locs     = str(kpis.get("unique_locations", "—"))
-        hero_states   = str(kpis.get("states", "—"))
+        hero_reviews = f"{kpis['total_reviews']:,}"
+        hero_versions = str(kpis.get("versions", "—"))
         hero_period   = f"{kpis.get('date_min','—')} – {kpis.get('date_max','—')}"
         hero_avg      = str(kpis.get("avg_rating", "—"))
         hero_neg      = f"{kpis.get('pct_negative','—')}%"
         hero_pos      = f"{kpis.get('pct_positive','—')}%"
     else:
-        hero_reviews = hero_locs = hero_states = hero_period = "—"
+        hero_reviews = hero_versions = hero_period = "—"
         hero_avg = hero_neg = hero_pos = "—"
 
     st.markdown(f"""
@@ -232,19 +229,15 @@ if cur_page == "home":
         <div class="kpi-row">
             <div class="kpi-box">
                 <div class="kpi-num">{hero_reviews}</div>
-                <div class="kpi-label">Reviews Loaded</div>
+                <div class="kpi-label">Reviews Analyzed</div>
             </div>
             <div class="kpi-box">
-                <div class="kpi-num">{hero_locs}</div>
-                <div class="kpi-label">Store Locations</div>
-            </div>
-            <div class="kpi-box">
-                <div class="kpi-num">{hero_states}</div>
-                <div class="kpi-label">States Covered</div>
+                <div class="kpi-num">{hero_versions}</div>
+                <div class="kpi-label">App Versions</div>
             </div>
             <div class="kpi-box">
                 <div class="kpi-num" style="color:#34d399;">{hero_avg} ⭐</div>
-                <div class="kpi-label">Chain Avg Rating</div>
+                <div class="kpi-label">Avg Rating</div>
             </div>
             <div class="kpi-box">
                 <div class="kpi-num" style="color:#f87171;">{hero_neg}</div>
