@@ -1,5 +1,5 @@
 """
-Retail Intelligence Platform — main entry point.
+Retail Intelligence Platform - main entry point.
 Run with: streamlit run main_app.py
 """
 
@@ -211,14 +211,14 @@ if cur_page == "home":
     # Hero
     if kpis:
         hero_reviews = f"{kpis['total_reviews']:,}"
-        hero_versions = str(kpis.get("versions", "—"))
-        hero_period   = f"{kpis.get('date_min','—')} – {kpis.get('date_max','—')}"
-        hero_avg      = str(kpis.get("avg_rating", "—"))
-        hero_neg      = f"{kpis.get('pct_negative','—')}%"
-        hero_pos      = f"{kpis.get('pct_positive','—')}%"
+        hero_versions = str(kpis.get("versions", "-"))
+        hero_period   = f"{kpis.get('date_min','-')} – {kpis.get('date_max','-')}"
+        hero_avg      = str(kpis.get("avg_rating", "-"))
+        hero_neg      = f"{kpis.get('pct_negative','-')}%"
+        hero_pos      = f"{kpis.get('pct_positive','-')}%"
     else:
-        hero_reviews = hero_versions = hero_period = "—"
-        hero_avg = hero_neg = hero_pos = "—"
+        hero_reviews = hero_versions = hero_period = "-"
+        hero_avg = hero_neg = hero_pos = "-"
 
     st.markdown(f"""
     <div class="hero-container">
@@ -271,7 +271,7 @@ if cur_page == "home":
          "Upload pilot vs control CSVs. Instant t-test, effect size, and a verdict: scale it, kill it, or keep watching.",
          "STATISTICS", "#8b5cf6", "test"),
         ("🤖", "Analyst Copilot",
-         "Plain-English chat. Ask 'Which states are trending down?' and get a real answer with numbers — no SQL needed.",
+         "Plain-English chat. Ask 'Which states are trending down?' and get a real answer with numbers - no SQL needed.",
          "AI CHAT", "#f59e0b", "copilot"),
     ]
 
