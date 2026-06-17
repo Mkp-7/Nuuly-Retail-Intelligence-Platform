@@ -1,5 +1,5 @@
 """
-Module 2 — Version & Time Intelligence
+Module 2 - Version & Time Intelligence
 (Replaces geo map since App Store reviews have no location data)
 Shows rating trends by app version, time period, and sentiment distribution.
 """
@@ -26,7 +26,7 @@ def load_data():
 
 def show():
     st.markdown("## 📊 Version & Trend Intelligence")
-    st.markdown(f"How **{APP_NAME}** ratings evolve across app versions and time — spot which release hurt or helped.")
+    st.markdown(f"How **{APP_NAME}** ratings evolve across app versions and time - spot which release hurt or helped.")
 
     df = load_data()
     if df is None or df.empty:
@@ -38,7 +38,7 @@ def show():
     avg        = df["stars"].mean()
     pct_neg    = (df["stars"] <= 2).mean() * 100
     pct_pos    = (df["stars"] >= 4).mean() * 100
-    versions   = df["version"].nunique() if "version" in df.columns else "—"
+    versions   = df["version"].nunique() if "version" in df.columns else "-"
 
     # Recent trend (last 30 days vs prior 30 days)
     if "date" in df.columns and not df["date"].isna().all():
